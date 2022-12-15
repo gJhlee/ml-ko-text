@@ -24,28 +24,27 @@ def summary(text):
 	return predicted_title
 
 
-print("Start API Server ...")
-from flask import Flask, request
-
-app = Flask(__name__)
-
-@app.route("/api/summary")
-def summary():
-	start_time = time()
-	text = request.args['text']
-	print("---> input text")
-	print(text);
-	predicted_title = summary(text)
-	print("---> summarized text")
-	print(predicted_title)
-
-	elapsed_time = time() - start_time
-	return f"""<h1>요약</h1>
-	<p>걸린시간: {round(elapsed_time, 2)}s</p>
-	<p><b>{predicted_title}</b></p>
-	<h2>원본 텍스트</h2>
-	<p>{text}</p>"""
-
 
 if __name__ == '__main__':
-    app.run()
+	print("Start API Server ...")
+	from flask import Flask, request
+
+	app = Flask(__name__)
+
+	@app.route("/api/summary")
+	def summary():
+		start_time = time()
+		text = request.args['text']
+		print("---> input text")
+		print(text);
+		predicted_title = summary(text)
+		print("---> summarized text")
+		print(predicted_title)
+
+		elapsed_time = time() - start_time
+		return f"""<h1>요약</h1>
+		<p>걸린시간: {round(elapsed_time, 2)}s</p>
+		<p><b>{predicted_title}</b></p>
+		<h2>원본 텍스트</h2>
+		<p>{text}</p>"""
+	app.run()
